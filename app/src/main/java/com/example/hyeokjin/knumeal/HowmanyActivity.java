@@ -25,7 +25,7 @@ public class HowmanyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 textview.setText(editText.getText());
-                Log.d("알림","1111111111"+16);
+
             }
         });
 
