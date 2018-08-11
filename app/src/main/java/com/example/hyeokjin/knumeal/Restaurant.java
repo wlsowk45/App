@@ -9,5 +9,5 @@ public class Restaurant extends Application {
     public double longitude;
     public double altitude;
     public double latitude;
-
+    public int test;
 }
