@@ -15,18 +15,18 @@ public class onepeopleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onepeople);
 
 
-        ArrayList<Restaurant> restaurants_main;
+        ArrayList<Restaurant> found_restaurant;
         Intent i = getIntent();
-        restaurants_main = i.getParcelableArrayListExtra("main_gate");
+        found_restaurant = i.getParcelableArrayListExtra("ToOne");
 
 
         TextView textView1=(TextView)findViewById(R.id.textView);
         TextView textView2=(TextView)findViewById(R.id.textView2);
         TextView textView3=(TextView)findViewById(R.id.textView3);
 
-        textView1.setText(restaurants_main.get(0).getName());
-        textView2.setText(restaurants_main.get(1).getName());
-        textView3.setText(restaurants_main.get(2).getName());
+        textView1.setText(found_restaurant.get(0).getName());
+        textView2.setText(found_restaurant.get(1).getName());
+        textView3.setText(found_restaurant.get(2).getName());
 
 
     }

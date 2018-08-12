@@ -13,9 +13,11 @@ public class HowmuchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_howmuch);
 
-        ArrayList<Restaurant> restaurants_main;
-        Intent i = getIntent();
-        restaurants_main = i.getParcelableArrayListExtra("main_gate");
+
+        final ArrayList<Restaurant> restaurants;
+        Intent intent = getIntent();
+        restaurants = intent.getParcelableArrayListExtra("ToMuch");
+
 
     }
 }

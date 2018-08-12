@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button=(Button)findViewById(R.id.button);
+        Button button2=(Button)findViewById(R.id.button2);
+        Button button3=(Button)findViewById(R.id.button3);
 
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 
@@ -34,10 +36,28 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //main->ToHow
                 Intent intent=new Intent(MainActivity.this,HowmanyActivity.class);
-                intent.putParcelableArrayListExtra("ToHow", restaurants);
+                intent.putParcelableArrayListExtra("ToMany", restaurants);
                 startActivity(intent);
+            }
+        });
+        //가격대 클릭했을때
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2=new Intent(MainActivity.this,HowmuchActivity.class);
+                intent2.putParcelableArrayListExtra("ToMuch", restaurants);
+                startActivity(intent2);
+            }
+        });
+        //올랜덤 클릭했을때
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3=new Intent(MainActivity.this,RandomAcitivity.class);
+                intent3.putParcelableArrayListExtra("ToRandom", restaurants);
+                startActivity(intent3);
             }
         });
 
