@@ -1,8 +1,10 @@
 package com.example.hyeokjin.knumeal;
 
-import android.app.Application;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Restaurant extends Application {
+
+public class Restaurant implements Parcelable {
 
     private int min_person;
     private String name;
@@ -18,6 +20,51 @@ public class Restaurant extends Application {
         this.min_person = min_person;
     }
 
+    private void readFromParcel(Parcel in){
+        name = in.readString();
+        longitude = in.readDouble();
+        latitude = in.readDouble();
+        min_person = in.readInt();
+    }
+
+
+    public Restaurant(Parcel in){
+        readFromParcel(in);
+    }
+
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeString(name);
+        dest.writeDouble(longitude);
+        dest.writeDouble(latitude);
+        dest.writeInt(min_person);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+
+        public Restaurant createFromParcel(Parcel src) {
+            return new Restaurant(src);
+        }
+
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
+        }
+    };
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
 
     public double getLongitude() {
