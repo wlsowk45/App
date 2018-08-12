@@ -16,8 +16,6 @@ public class HowmanyActivity extends AppCompatActivity {
     EditText editText;
     int num;
 
-    ArrayList<Restaurant> restaurant_main = new ArrayList<Restaurant>();
-    ArrayList<Restaurant> restaurant_hall = new ArrayList<Restaurant>();
     ArrayList<Restaurant> find_restaurant = new ArrayList<Restaurant>();
 
     @Override
@@ -29,13 +27,9 @@ public class HowmanyActivity extends AppCompatActivity {
         textview = (TextView) findViewById(R.id.textView);
 
 
-        restaurant_main.add(new Restaurant("밥버거", 1, 2, 1));
-        restaurant_hall.add(new Restaurant("밥버거1", 2, 3, 1));
-        restaurant_hall.add(new Restaurant("한솥2", 3, 4, 2));
-        restaurant_hall.add(new Restaurant("한솥3", 3, 4, 2));
-        restaurant_hall.add(new Restaurant("한솥4", 3, 4, 3));
-        restaurant_hall.add(new Restaurant("한솥5", 3, 4, 4));
-        restaurant_hall.add(new Restaurant("한솥6", 3, 4, 5));
+        final ArrayList<Restaurant> restaurants;
+        Intent intent = getIntent();
+        restaurants = intent.getParcelableArrayListExtra("ToHow");
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -49,36 +43,36 @@ public class HowmanyActivity extends AppCompatActivity {
                 } else {
                     if (num == 1) {
                         textview.setText("혼밥");
-                        for(int i=0;i<restaurant_hall.size();i++)
+                        for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurant_hall.get(i).getMin_person()<2)
-                                find_restaurant.add(restaurant_hall.get(i));
+                            if(restaurants.get(i).getMin_person()<2)
+                                find_restaurant.add(restaurants.get(i));
                         }
 
                     } else if (num == 2 || num == 3) {
                         textview.setText("2~3명 액티비티");
 
-                        for(int i=0;i<restaurant_hall.size();i++)
+                        for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurant_hall.get(i).getMin_person()<4)
-                                find_restaurant.add(restaurant_hall.get(i));
+                            if(restaurants.get(i).getMin_person()<4)
+                                find_restaurant.add(restaurants.get(i));
                         }
                     } else if (num == 4 || num == 5 || num == 6) {
                         textview.setText("4~6명 액티비티");
 
-                        for(int i=0;i<restaurant_hall.size();i++)
+                        for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurant_hall.get(i).getMin_person()<7)
-                                find_restaurant.add(restaurant_hall.get(i));
+                            if(restaurants.get(i).getMin_person()<7)
+                                find_restaurant.add(restaurants.get(i));
                         }
 
                     } else if (num >= 6) {
                         textview.setText("6명이상 액티비티");
 
-                        for(int i=0;i<restaurant_hall.size();i++)
+                        for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurant_hall.get(i).getMin_person()>=7)
-                                find_restaurant.add(restaurant_hall.get(i));
+                            if(restaurants.get(i).getMin_person()>=7)
+                                find_restaurant.add(restaurants.get(i));
                         }
 
                     } else {
@@ -86,9 +80,7 @@ public class HowmanyActivity extends AppCompatActivity {
                     }
                 }
 
-                Intent intent = new Intent(getApplicationContext(), onepeopleActivity.class);
-                intent.putParcelableArrayListExtra("main_gate", find_restaurant);
-                startActivity(intent);
+
                 //test
 
             }

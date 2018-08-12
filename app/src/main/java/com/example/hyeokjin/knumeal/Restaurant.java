@@ -10,14 +10,18 @@ public class Restaurant implements Parcelable {
     private String name;
     private double longitude;
     private double latitude;
+    private String position;
+    private int price;
 
 
-    public Restaurant(String name, double longitude, double latitude, int min_person)
+    public Restaurant(String name, double longitude, double latitude, int min_person, String position, int price)
     {
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
         this.min_person = min_person;
+        this.position = position;
+        this.price = price;
     }
 
     private void readFromParcel(Parcel in){
@@ -25,6 +29,8 @@ public class Restaurant implements Parcelable {
         longitude = in.readDouble();
         latitude = in.readDouble();
         min_person = in.readInt();
+        position = in.readString();
+        price = in.readInt();
     }
 
 
@@ -45,6 +51,8 @@ public class Restaurant implements Parcelable {
         dest.writeDouble(longitude);
         dest.writeDouble(latitude);
         dest.writeInt(min_person);
+        dest.writeString(position);
+        dest.writeInt(price);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -57,6 +65,23 @@ public class Restaurant implements Parcelable {
             return new Restaurant[size];
         }
     };
+
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public String getName() {
         return name;

@@ -14,9 +14,12 @@ public class onepeopleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onepeople);
 
+
         ArrayList<Restaurant> restaurants_main;
         Intent i = getIntent();
         restaurants_main = i.getParcelableArrayListExtra("main_gate");
+
+
         TextView textView1=(TextView)findViewById(R.id.textView);
         TextView textView2=(TextView)findViewById(R.id.textView2);
         TextView textView3=(TextView)findViewById(R.id.textView3);
