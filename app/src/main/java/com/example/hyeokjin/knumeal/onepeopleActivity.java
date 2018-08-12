@@ -20,6 +20,7 @@ public class onepeopleActivity extends AppCompatActivity {
         found_restaurant = i.getParcelableArrayListExtra("ToOne");
 
 
+
         TextView textView1=(TextView)findViewById(R.id.textView);
         TextView textView2=(TextView)findViewById(R.id.textView2);
         TextView textView3=(TextView)findViewById(R.id.textView3);
