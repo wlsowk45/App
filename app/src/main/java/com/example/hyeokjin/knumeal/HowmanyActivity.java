@@ -49,11 +49,6 @@ public class HowmanyActivity extends AppCompatActivity {
 
 
 
-                }
-            }
-
-
-
         });
 
 
