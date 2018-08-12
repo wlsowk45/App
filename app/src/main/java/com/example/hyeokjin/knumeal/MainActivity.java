@@ -12,10 +12,6 @@ public class MainActivity extends AppCompatActivity {
 
     MyApplication myApplication;
 
-    ArrayList<Restaurant> restaurant_main = new ArrayList<Restaurant>();
-    ArrayList<Restaurant> restaurant_hall = new ArrayList<Restaurant>();
-    ArrayList<Restaurant> find_restaurant = new ArrayList<Restaurant>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //main->ToHow
                 Intent intent=new Intent(MainActivity.this,HowmanyActivity.class);
-                intent.putParcelableArrayListExtra("main_gate", restaurants);
+                intent.putParcelableArrayListExtra("ToMany", restaurants);
                 startActivity(intent);
             }
         });
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent2=new Intent(MainActivity.this,HowmuchActivity.class);
-                intent2.putParcelableArrayListExtra("main_gate", restaurants);
+                intent2.putParcelableArrayListExtra("ToMuch", restaurants);
                 startActivity(intent2);
             }
         });
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent3=new Intent(MainActivity.this,RandomAcitivity.class);
-                intent3.putParcelableArrayListExtra("main_gate", restaurants);
+                intent3.putParcelableArrayListExtra("ToRandom", restaurants);
                 startActivity(intent3);
             }
         });

@@ -27,9 +27,10 @@ public class HowmanyActivity extends AppCompatActivity {
         textview = (TextView) findViewById(R.id.textView);
 
 
+        //main으로부터 restaurant 정보 받음
         final ArrayList<Restaurant> restaurants;
         Intent intent = getIntent();
-        restaurants = intent.getParcelableArrayListExtra("ToHow");
+        restaurants = intent.getParcelableArrayListExtra("ToMany");
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +55,7 @@ public class HowmanyActivity extends AppCompatActivity {
 
                         for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurants.get(i).getMin_person()>=2&&restaurants.get(i).getMin_person()<4)
+                            if(restaurants.get(i).getMin_person()<4)
                                 find_restaurant.add(restaurants.get(i));
                         }
                     } else if (num == 4 || num == 5 || num == 6) {
@@ -62,7 +63,7 @@ public class HowmanyActivity extends AppCompatActivity {
 
                         for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurants.get(i).getMin_person()>=4&&restaurants.get(i).getMin_person()<7)
+                            if(restaurants.get(i).getMin_person()<7)
                                 find_restaurant.add(restaurants.get(i));
                         }
 
@@ -81,9 +82,10 @@ public class HowmanyActivity extends AppCompatActivity {
                 }
 
 
-
-
-                //test
+                //HowMany -> onepeople
+                Intent intent=new Intent(HowmanyActivity.this,onepeopleActivity.class);
+                intent.putParcelableArrayListExtra("ToOne", find_restaurant);
+                startActivity(intent);
 
             }
 
