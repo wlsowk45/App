@@ -1,8 +1,7 @@
 package com.example.hyeokjin.knumeal;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,11 +46,6 @@ public class HowmanyActivity extends AppCompatActivity {
                     else{
                         textview.setText("양의 정수를 입력하시오");
                     }
-
-
-
-                    }
-                }
 
 
 
