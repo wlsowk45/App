@@ -6,13 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     MyApplication myApplication;
-    ArrayList<Restaurant> restaurant_main = new ArrayList<Restaurant>();
-    ArrayList<Restaurant> restaurant_hall = new ArrayList<Restaurant>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
         Button button=(Button)findViewById(R.id.button);
 
         //restaurant data
-        restaurant_main.add(new Restaurant("밥버거",1,2,1));
-        restaurant_hall.add(new Restaurant("밥버거1",2,3,1));
-        restaurant_hall.add(new Restaurant("한솥",3,4,5));
 
         //인원수 클릭했을때
         button.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /*
+        ArrayList<Restaurant> restaurants_main;
+        Intent i = getIntent();
+        restaurants_main = i.getParcelableArrayListExtra("main_gate");
+
+        Toast.makeText(getApplicationContext(),restaurants_main.get(0).getName(),Toast.LENGTH_LONG).show();
+        */
 
         //test
 
