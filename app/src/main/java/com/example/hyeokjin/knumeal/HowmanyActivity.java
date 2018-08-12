@@ -32,7 +32,12 @@ public class HowmanyActivity extends AppCompatActivity {
 
         restaurant_main.add(new Restaurant("밥버거", 1, 2, 1));
         restaurant_hall.add(new Restaurant("밥버거1", 2, 3, 1));
+        restaurant_hall.add(new Restaurant("한솥", 3, 4, 2));
         restaurant_hall.add(new Restaurant("한솥", 3, 4, 5));
+        restaurant_hall.add(new Restaurant("한솥", 3, 4, 3));
+        restaurant_hall.add(new Restaurant("한솥", 3, 4, 4));
+        restaurant_hall.add(new Restaurant("한솥", 3, 4, 5));
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
