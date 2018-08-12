@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //test
+
 
        /*
        //permission이 허가 되었는지 확인 granted == true
