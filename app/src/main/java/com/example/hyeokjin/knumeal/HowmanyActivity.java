@@ -54,7 +54,7 @@ public class HowmanyActivity extends AppCompatActivity {
 
                         for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurants.get(i).getMin_person()<4)
+                            if(restaurants.get(i).getMin_person()>=2&&restaurants.get(i).getMin_person()<4)
                                 find_restaurant.add(restaurants.get(i));
                         }
                     } else if (num == 4 || num == 5 || num == 6) {
@@ -62,7 +62,7 @@ public class HowmanyActivity extends AppCompatActivity {
 
                         for(int i=0;i<restaurants.size();i++)
                         {
-                            if(restaurants.get(i).getMin_person()<7)
+                            if(restaurants.get(i).getMin_person()>=4&&restaurants.get(i).getMin_person()<7)
                                 find_restaurant.add(restaurants.get(i));
                         }
 
@@ -79,6 +79,8 @@ public class HowmanyActivity extends AppCompatActivity {
                         textview.setText("양의 정수를 입력하시오");
                     }
                 }
+
+
 
 
                 //test
