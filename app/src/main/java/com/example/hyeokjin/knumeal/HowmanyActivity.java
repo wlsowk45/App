@@ -27,15 +27,34 @@ public class HowmanyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 str=editText.getText().toString();
+                num=Integer.parseInt(editText.getText().toString());
                 if(str.length()==0){
                     textview.setText("값을 입력하시오");
                 }
                 else{
-                    textview.setText("입력된 값"+editText.getText());
+                    if(num==1){
+                        textview.setText("혼밥");
+                    }
+                    else if(num==2||num==3) {
+                        textview.setText("2~3명 액티비티");
+                    }
+                    else if(num==4||num==5||num==6) {
+                        textview.setText("4~6명 액티비티");
+                    }
+                    else if(num>=6) {
+                        textview.setText("6명이상 액티비티");
+                    }
+                    else{
+                        textview.setText("양의 정수를 입력하시오");
+                    }
+
+
+
+                    }
                 }
 
 
-            }
+
         });
 
 
