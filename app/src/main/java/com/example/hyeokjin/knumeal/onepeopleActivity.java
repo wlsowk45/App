@@ -19,9 +19,12 @@ public class onepeopleActivity extends AppCompatActivity {
         restaurants_main = i.getParcelableArrayListExtra("main_gate");
         TextView textView1=(TextView)findViewById(R.id.textView);
         TextView textView2=(TextView)findViewById(R.id.textView2);
+        TextView textView3=(TextView)findViewById(R.id.textView3);
 
         textView1.setText(restaurants_main.get(0).getName());
         textView2.setText(restaurants_main.get(1).getName());
+        textView3.setText(restaurants_main.get(2).getName());
+
 
     }
 }
