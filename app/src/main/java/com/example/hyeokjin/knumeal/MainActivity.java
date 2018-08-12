@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         restaurants.add(new Restaurant("밥버거", 1, 2, 1,"Hall_gate",3000));
         restaurants.add(new Restaurant("밥버거1", 2, 3, 1,"Main_gate",3000));
+        restaurants.add(new Restaurant("밥버거2", 2, 3, 1,"Main_gate",3000));
         restaurants.add(new Restaurant("한솥2", 3, 4, 2,"Main_gate",3000));
         restaurants.add(new Restaurant("한솥3", 3, 4, 2,"Main_gate",4000));
         restaurants.add(new Restaurant("한솥4", 3, 4, 3,"Main_gate",5000));
