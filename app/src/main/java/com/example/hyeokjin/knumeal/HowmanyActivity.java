@@ -11,20 +11,29 @@ import android.widget.TextView;
 public class HowmanyActivity extends AppCompatActivity {
     String str;
     TextView textview;
-
+    EditText editText;
+    int num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_howmany);
-        final EditText editText=(EditText)findViewById(R.id.editText);
+        editText=(EditText)findViewById(R.id.editText);
         Button button=(Button)findViewById(R.id.button4);
         textview=(TextView)findViewById(R.id.textView);
-        str=editText.getText().toString();
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textview.setText(editText.getText());
+                str=editText.getText().toString();
+                if(str.length()==0){
+                    textview.setText("값을 입력하시오");
+                }
+                else{
+                    textview.setText("입력된 값"+editText.getText());
+                }
+
 
             }
         });
