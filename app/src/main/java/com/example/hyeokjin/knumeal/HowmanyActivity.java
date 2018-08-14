@@ -82,6 +82,7 @@ public class HowmanyActivity extends AppCompatActivity {
                 Intent intent=new Intent(HowmanyActivity.this,onepeopleActivity.class);
                 intent.putParcelableArrayListExtra("ToOne", find_restaurant);
                 startActivity(intent);
+                find_restaurant.clear();
 
 
 
