@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("한솥4", 3, 4, 3,"Main_gate",5000));
         restaurants.add(new Restaurant("한솥5", 3, 4, 4,"Main_gate",6000));
         restaurants.add(new Restaurant("한솥6", 3, 4, 5,"Main_gate",7000));
+        restaurants.add(new Restaurant("맘스터치",35.885838,128.610095,1,"Hall_gate",5000));
 
 
 
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent4=new Intent (MainActivity.this,MapsActivity.class);
+                intent4.putParcelableArrayListExtra("ToMap", restaurants);
                 startActivity(intent4);
             }
 
