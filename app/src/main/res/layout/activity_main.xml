@@ -28,4 +28,11 @@
         android:layout_weight="1"
         android:text="올랜덤" />
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="MAP" />
+
 </LinearLayout>

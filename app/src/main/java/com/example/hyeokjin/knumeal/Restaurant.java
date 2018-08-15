@@ -14,11 +14,11 @@ public class Restaurant implements Parcelable {
     private int price;
 
 
-    public Restaurant(String name, double longitude, double latitude, int min_person, String position, int price)
+    public Restaurant(String name,  double latitude, double longitude, int min_person, String position, int price)
     {
         this.name = name;
-        this.longitude = longitude;
         this.latitude = latitude;
+        this.longitude = longitude;
         this.min_person = min_person;
         this.position = position;
         this.price = price;
@@ -26,8 +26,8 @@ public class Restaurant implements Parcelable {
 
     private void readFromParcel(Parcel in){
         name = in.readString();
-        longitude = in.readDouble();
         latitude = in.readDouble();
+        longitude = in.readDouble();
         min_person = in.readInt();
         position = in.readString();
         price = in.readInt();
@@ -48,8 +48,8 @@ public class Restaurant implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags){
         dest.writeString(name);
-        dest.writeDouble(longitude);
         dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
         dest.writeInt(min_person);
         dest.writeString(position);
         dest.writeInt(price);

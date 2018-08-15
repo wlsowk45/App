@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Button button=(Button)findViewById(R.id.button);
         Button button2=(Button)findViewById(R.id.button2);
         Button button3=(Button)findViewById(R.id.button3);
+        Button button4=(Button)findViewById(R.id.button4);
 
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("한솥4", 3, 4, 3,"Main_gate",5000));
         restaurants.add(new Restaurant("한솥5", 3, 4, 4,"Main_gate",6000));
         restaurants.add(new Restaurant("한솥6", 3, 4, 5,"Main_gate",7000));
+        restaurants.add(new Restaurant("맘스터치",35.885838,128.610095,1,"Hall_gate",5000));
 
 
 
@@ -61,6 +63,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent3);
             }
         });
+
+        button4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent4=new Intent (MainActivity.this,MapsActivity.class);
+                intent4.putParcelableArrayListExtra("ToMap", restaurants);
+                startActivity(intent4);
+            }
+
+        });
+
+
 
         /*
         ArrayList<Restaurant> restaurants_main;
