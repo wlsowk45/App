@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Button button=(Button)findViewById(R.id.button);
         Button button2=(Button)findViewById(R.id.button2);
         Button button3=(Button)findViewById(R.id.button3);
+        Button button4=(Button)findViewById(R.id.button4);
 
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 
@@ -61,6 +62,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent3);
             }
         });
+
+        button4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent4=new Intent (MainActivity.this,MapsActivity.class);
+                startActivity(intent4);
+            }
+
+        });
+
+
 
         /*
         ArrayList<Restaurant> restaurants_main;

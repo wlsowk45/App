@@ -1,18 +1,20 @@
 package com.example.hyeokjin.knumeal;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    UiSettings mapSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        if (mMap != null) {
+            try {
+
+                mapSettings = mMap.getUiSettings();
+                mMap.setMyLocationEnabled(true);
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                mapSettings.setZoomControlsEnabled(true);
+
+
+            }catch(SecurityException e){
+                e.printStackTrace();
+            }
+
+        }
     }
 
 
@@ -35,19 +51,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
-        /*
-        Intent intent = getIntent();
-        latLang = intent.getDoubleArrayExtra(MapsActivity.INTENT_KEY);
-        */
-        //이전 액티비티에서 위도와 경도를 입력받아서 위치를 보유주기위해
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(
+                new LatLng(37.555744,126.970431)
+        ));
 
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng point) {
+                MarkerOptions mOptions = new MarkerOptions();
+                // 마커 타이틀
+                mOptions.title("마커 좌표");
+                Double latitude = point.latitude;//위도
+                Double longitude = point.longitude;//경도
+                mOptions.snippet(latitude.toString()+","+longitude.toString());
+                //latlng : 위도 경도 쌍을 나타냄
+                mOptions.position(new LatLng(latitude,longitude));
+                //마커(핀) 추가
+                googleMap.addMarker(mOptions);
+            }
+        });
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng seoul_station = new LatLng(37.555744, 126.970431);
+        mMap.addMarker(new MarkerOptions().position(seoul_station).title("서울역"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(seoul_station));
     }
 }
