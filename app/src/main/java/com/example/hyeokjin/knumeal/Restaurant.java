@@ -12,6 +12,7 @@ public class Restaurant implements Parcelable {
     private double latitude;
     private String position;
     private int price;
+    private boolean checked;
 
 
     public Restaurant(String name,  double latitude, double longitude, int min_person, String position, int price)
@@ -117,4 +118,11 @@ public class Restaurant implements Parcelable {
         this.min_person = min_person;
     }
 
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 }
