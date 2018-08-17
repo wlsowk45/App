@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class onepeopleActivity extends AppCompatActivity {
-    int[] b=new int[10];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +23,15 @@ public class onepeopleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onepeople);
 
 
-        ArrayList<Restaurant> found_restaurant;
+
+        final ArrayList<Restaurant> found_restaurant;
         Intent i = getIntent();
         found_restaurant = i.getParcelableArrayListExtra("ToOne");
         ListView listView=(ListView)findViewById(R.id.listview);
-        PeopleAdapter adapter=new PeopleAdapter();
+        final PeopleAdapter adapter=new PeopleAdapter();
         for(int j=0;j<found_restaurant.size();j++){
             adapter.addItem(new Peopleitems(found_restaurant.get(j).getName()));
         }
-
-
-
 
         listView.setAdapter(adapter);
 
@@ -43,14 +41,12 @@ public class onepeopleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                for(int index=0;index<found_restaurant.size();index++){
+                    found_restaurant.get(index).setChecked(adapter.getChecked(index));
+                }
+
             }
         });
-
-
-
-
-
-
 
 
     }
@@ -77,6 +73,11 @@ public class onepeopleActivity extends AppCompatActivity {
             return i;
         }
 
+        public boolean getChecked(int i)
+        {
+            return items.get(i).isChecked();
+        }
+
         @Override
         public View getView(int i, View convertview, ViewGroup viewGroup) {
             peopleitemviewcod view = new peopleitemviewcod(getApplicationContext());
@@ -87,21 +88,13 @@ public class onepeopleActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b){
-                        Toast.makeText(getApplicationContext(),"ㅎㅎ"+item.getName()+"체크"+b,Toast.LENGTH_LONG).show();
+                        item.setChecked(true);
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),"ㅎㅎ"+item.getName()+"체크"+b,Toast.LENGTH_LONG).show();
+                        item.setChecked(false);
                     }
                 }
             });
-
-
-
-
-
-
-
-
 
                 return view;
 
