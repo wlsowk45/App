@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class onepeopleActivity extends AppCompatActivity {
 
 
     ArrayList<Restaurant> found_restaurant = new ArrayList<Restaurant>();
+    PeopleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class onepeopleActivity extends AppCompatActivity {
         Intent i = getIntent();
         found_restaurant = i.getParcelableArrayListExtra("ToOne");
         ListView listView=(ListView)findViewById(R.id.listview);
-        PeopleAdapter adapter=new PeopleAdapter();
+        adapter=new PeopleAdapter();
         for(int j=0;j<found_restaurant.size();j++){
             adapter.addItem(new Peopleitems(found_restaurant.get(j).getName()));
         }
@@ -41,13 +43,23 @@ public class onepeopleActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(onepeopleActivity.this,finalActivity.class);
-                i.putExtra("from one",true);
-                startActivity(i);
+                for(int i=0;i<found_restaurant.size();i++){
+                        found_restaurant.get(i).setChecked(adapter.getChecked(i));
+                        if(found_restaurant.get(i).isChecked()){
+                            Toast.makeText(getApplicationContext(),"체크 된 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"체크X 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                        }
 
-                Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
+                }
+
+
+
+
+                /*Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
                 intent.putParcelableArrayListExtra("To final", found_restaurant);
-                startActivity(intent);
+                startActivity(intent); */
             }
         });
 
@@ -89,15 +101,17 @@ public class onepeopleActivity extends AppCompatActivity {
             CheckBox checkBox=(CheckBox)view.findViewById(R.id.checkBox);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(b){
-                        item.setChecked(true);
-                    }
-                    else{
-                        item.setChecked(false);
-                    }
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                 //  Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.checked,Toast.LENGTH_SHORT).show();
+                    item.setChecked(true);
                 }
-            });
+                else{
+                    //Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.checked,Toast.LENGTH_SHORT).show();
+                    item.setChecked(false);
+                }
+            }
+        });
 
                 return view;
 
