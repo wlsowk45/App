@@ -39,6 +39,7 @@
         <activity android:name=".onepeopleActivity" />
         <activity android:name=".HowmuchActivity" />
         <activity android:name=".RandomAcitivity" />
+        <activity android:name=".finalActivity"></activity>
     </application>
 
 </manifest>

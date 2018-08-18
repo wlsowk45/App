@@ -1,21 +1,14 @@
 package com.example.hyeokjin.knumeal;
 
-import android.widget.CheckBox;
-
 public class Peopleitems {
 
-    private String name;
-    private boolean checked=true;
-
-    public boolean isChecked() {
-        return checked;
-    }
+    String name;
+    boolean checked;
 
 
     public Peopleitems(String name) {
         this.name = name;
     }
-
 
     public String getName() {
         return name;
@@ -23,6 +16,10 @@ public class Peopleitems {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isChecked() {
+        return checked;
     }
 
     public void setChecked(boolean checked) {
