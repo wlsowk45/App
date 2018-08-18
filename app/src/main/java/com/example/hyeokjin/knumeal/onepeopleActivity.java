@@ -55,11 +55,11 @@ public class onepeopleActivity extends AppCompatActivity {
                 }
 
 
-
-
-                /*Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
+                Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
                 intent.putParcelableArrayListExtra("To final", found_restaurant);
-                startActivity(intent); */
+                startActivity(intent);
+
+
             }
         });
 
