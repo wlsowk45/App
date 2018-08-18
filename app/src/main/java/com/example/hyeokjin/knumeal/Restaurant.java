@@ -3,7 +3,6 @@ package com.example.hyeokjin.knumeal;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class Restaurant implements Parcelable {
 
     private int min_person;
@@ -12,11 +11,10 @@ public class Restaurant implements Parcelable {
     private double latitude;
     private String position;
     private int price;
-    private boolean checked;
+    private byte checked;
 
 
-    public Restaurant(String name,  double latitude, double longitude, int min_person, String position, int price)
-    {
+    public Restaurant(String name, double latitude, double longitude, int min_person, String position, int price) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -25,7 +23,7 @@ public class Restaurant implements Parcelable {
         this.price = price;
     }
 
-    private void readFromParcel(Parcel in){
+    private void readFromParcel(Parcel in) {
         name = in.readString();
         latitude = in.readDouble();
         longitude = in.readDouble();
@@ -35,19 +33,18 @@ public class Restaurant implements Parcelable {
     }
 
 
-    public Restaurant(Parcel in){
+    public Restaurant(Parcel in) {
         readFromParcel(in);
     }
 
     @Override
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 
 
-
     @Override
-    public void writeToParcel(Parcel dest, int flags){
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
@@ -119,10 +116,17 @@ public class Restaurant implements Parcelable {
     }
 
     public boolean isChecked() {
-        return checked;
+        if (checked == 0) {
+            return false;
+        }
+        return true;
     }
 
     public void setChecked(boolean checked) {
-        this.checked = checked;
+        if (checked == false) {
+            this.checked = 0;
+        } else {
+            this.checked = 1;
+        }
     }
 }

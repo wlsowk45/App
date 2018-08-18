@@ -3,7 +3,7 @@ package com.example.hyeokjin.knumeal;
 public class Peopleitems {
 
     String name;
-    boolean checked;
+    int checked;
 
 
     public Peopleitems(String name) {
@@ -19,11 +19,18 @@ public class Peopleitems {
     }
 
     public boolean isChecked() {
-        return checked;
+
+        if(checked==0)
+            return false;
+        else
+            return true;
     }
 
     public void setChecked(boolean checked) {
-        this.checked = checked;
+        if(!checked)
+            this.checked = 0;
+        else
+            this.checked = 1;
     }
 }
 

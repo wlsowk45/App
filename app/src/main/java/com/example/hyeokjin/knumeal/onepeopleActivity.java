@@ -18,6 +18,7 @@ public class onepeopleActivity extends AppCompatActivity {
 
 
     ArrayList<Restaurant> found_restaurant = new ArrayList<Restaurant>();
+    ArrayList<Restaurant> checked_restaurant = new ArrayList<Restaurant>();
     PeopleAdapter adapter;
 
     @Override
@@ -47,9 +48,7 @@ public class onepeopleActivity extends AppCompatActivity {
                         found_restaurant.get(i).setChecked(adapter.getChecked(i));
                         if(found_restaurant.get(i).isChecked()){
                             Toast.makeText(getApplicationContext(),"체크 된 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"체크X 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                            checked_restaurant.add(found_restaurant.get(i));
                         }
 
                 }
@@ -58,7 +57,6 @@ public class onepeopleActivity extends AppCompatActivity {
                 Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
                 intent.putParcelableArrayListExtra("To final", found_restaurant);
                 startActivity(intent);
-
 
             }
         });
@@ -103,11 +101,11 @@ public class onepeopleActivity extends AppCompatActivity {
                 @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                 //  Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.checked,Toast.LENGTH_SHORT).show();
+                   //Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName(),Toast.LENGTH_SHORT).show();
                     item.setChecked(true);
                 }
                 else{
-                    //Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.checked,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"체크X"+item.getName(),Toast.LENGTH_SHORT).show();
                     item.setChecked(false);
                 }
             }
