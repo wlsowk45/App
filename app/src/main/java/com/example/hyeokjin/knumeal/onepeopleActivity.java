@@ -45,6 +45,10 @@ public class onepeopleActivity extends AppCompatActivity {
                     found_restaurant.get(index).setChecked(adapter.getChecked(index));
                 }
 
+                Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
+                intent.putParcelableArrayListExtra("To final", found_restaurant);
+                startActivity(intent);
+
             }
         });
 
