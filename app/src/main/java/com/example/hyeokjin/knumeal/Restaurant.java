@@ -3,7 +3,6 @@ package com.example.hyeokjin.knumeal;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class Restaurant implements Parcelable {
 
     private int min_person;
@@ -12,10 +11,10 @@ public class Restaurant implements Parcelable {
     private double latitude;
     private String position;
     private int price;
+    private int checked;
 
 
-    public Restaurant(String name,  double latitude, double longitude, int min_person, String position, int price)
-    {
+    public Restaurant(String name, double latitude, double longitude, int min_person, String position, int price) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -24,35 +23,36 @@ public class Restaurant implements Parcelable {
         this.price = price;
     }
 
-    private void readFromParcel(Parcel in){
+    private void readFromParcel(Parcel in) {
         name = in.readString();
         latitude = in.readDouble();
         longitude = in.readDouble();
         min_person = in.readInt();
         position = in.readString();
         price = in.readInt();
+        checked=in.readInt();
     }
 
 
-    public Restaurant(Parcel in){
+    public Restaurant(Parcel in) {
         readFromParcel(in);
     }
 
     @Override
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 
 
-
     @Override
-    public void writeToParcel(Parcel dest, int flags){
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
         dest.writeInt(min_person);
         dest.writeString(position);
         dest.writeInt(price);
+        dest.writeInt(checked);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -117,4 +117,20 @@ public class Restaurant implements Parcelable {
         this.min_person = min_person;
     }
 
+    public boolean isChecked() {
+        if (checked == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public void setChecked(boolean checked) {
+        if (checked == false) {
+            this.checked = 0;
+        } else {
+            this.checked = 1;
+        }
+    }
 }

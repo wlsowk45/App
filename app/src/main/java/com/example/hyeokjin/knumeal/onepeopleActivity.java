@@ -15,7 +15,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class onepeopleActivity extends AppCompatActivity {
-    int[] b=new int[10];
+
+
+    ArrayList<Restaurant> found_restaurant = new ArrayList<Restaurant>();
+    ArrayList<Restaurant> checked_restaurant = new ArrayList<Restaurant>();
+    PeopleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +27,15 @@ public class onepeopleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onepeople);
 
 
-        ArrayList<Restaurant> found_restaurant;
+
+        //ArrayList<Restaurant> final_restaurant = new ArrayList<Restaurant>();
         Intent i = getIntent();
         found_restaurant = i.getParcelableArrayListExtra("ToOne");
         ListView listView=(ListView)findViewById(R.id.listview);
-        PeopleAdapter adapter=new PeopleAdapter();
+        adapter=new PeopleAdapter();
         for(int j=0;j<found_restaurant.size();j++){
             adapter.addItem(new Peopleitems(found_restaurant.get(j).getName()));
         }
-
-
-
 
         listView.setAdapter(adapter);
 
@@ -42,15 +44,20 @@ public class onepeopleActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for(int i=0;i<found_restaurant.size();i++){
+                    found_restaurant.get(i).setChecked(adapter.getChecked(i));
+                    if(found_restaurant.get(i).isChecked()){
+                        //Toast.makeText(getApplicationContext(),"체크 된 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                        checked_restaurant.add(found_restaurant.get(i));
+                    }
 
+                }
+
+                Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
+                intent.putParcelableArrayListExtra("To final", found_restaurant);
+                startActivity(intent);
             }
         });
-
-
-
-
-
-
 
 
     }
@@ -77,6 +84,11 @@ public class onepeopleActivity extends AppCompatActivity {
             return i;
         }
 
+        public boolean getChecked(int i)
+        {
+            return items.get(i).isChecked();
+        }
+
         @Override
         public View getView(int i, View convertview, ViewGroup viewGroup) {
             peopleitemviewcod view = new peopleitemviewcod(getApplicationContext());
@@ -87,24 +99,21 @@ public class onepeopleActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b){
-                        Toast.makeText(getApplicationContext(),"ㅎㅎ"+item.getName()+"체크"+b,Toast.LENGTH_LONG).show();
+                        item.setChecked(true);
+                        Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),"ㅎㅎ"+item.getName()+"체크"+b,Toast.LENGTH_LONG).show();
+                        item.setChecked(false);
+                        Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
 
-
-
-
-
-
-
-
-
-                return view;
+            return view;
 
         }
     }
+
 }
