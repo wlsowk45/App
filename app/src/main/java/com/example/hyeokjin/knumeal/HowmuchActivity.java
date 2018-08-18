@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,11 +39,15 @@ public class HowmuchActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 str = editText.getText().toString();
-                num = Integer.parseInt(editText.getText().toString());
 
-                if (str.length() == 0) {
-                    textview.setText("값을 입력하시오");
-                } else {
+                if(str.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(),"가격을 입력하세요",Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    num = Integer.parseInt(editText.getText().toString());
+
                     if (num <2500) {
                         for(int i=0;i<restaurants.size();i++)
                         {
@@ -72,8 +77,6 @@ public class HowmuchActivity extends AppCompatActivity {
                         }
 
 
-
-
                     }
 
                     else if (num >6000) {
@@ -86,13 +89,14 @@ public class HowmuchActivity extends AppCompatActivity {
                     else {
                         textview.setText("양의 정수를 입력하시오");
                     }
-                }
 
-                //HowMuch -> onepeople
-                Intent intent=new Intent(HowmuchActivity.this,onepeopleActivity.class);
-                intent.putParcelableArrayListExtra("ToOne", find_restaurant);
-                startActivity(intent);
-                find_restaurant.clear();
+                    //HowMuch -> onepeople
+                    Intent intent=new Intent(HowmuchActivity.this,onepeopleActivity.class);
+                    intent.putParcelableArrayListExtra("To one", find_restaurant);
+                    startActivity(intent);
+                    find_restaurant.clear();
+
+                }
 
 
 
