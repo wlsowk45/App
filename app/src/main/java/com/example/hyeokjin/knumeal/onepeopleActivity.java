@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,6 +17,7 @@ public class onepeopleActivity extends AppCompatActivity {
 
 
     ArrayList<Restaurant> found_restaurant = new ArrayList<Restaurant>();
+    ArrayList<Restaurant> checked_restaurant = new ArrayList<Restaurant>();
     PeopleAdapter adapter;
 
     @Override
@@ -46,10 +46,8 @@ public class onepeopleActivity extends AppCompatActivity {
                 for(int i=0;i<found_restaurant.size();i++){
                         found_restaurant.get(i).setChecked(adapter.getChecked(i));
                         if(found_restaurant.get(i).isChecked()){
-                            Toast.makeText(getApplicationContext(),"체크 된 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"체크X 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),"체크 된 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                            checked_restaurant.add(found_restaurant.get(i));
                         }
 
                 }
@@ -58,7 +56,6 @@ public class onepeopleActivity extends AppCompatActivity {
                 Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
                 intent.putParcelableArrayListExtra("To final", found_restaurant);
                 startActivity(intent);
-
 
             }
         });

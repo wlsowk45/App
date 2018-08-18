@@ -11,6 +11,7 @@ public class finalActivity extends AppCompatActivity {
 
     ArrayList<Restaurant> final_restaurant = new ArrayList<Restaurant>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +23,10 @@ public class finalActivity extends AppCompatActivity {
 
         for(int i=0;i<final_restaurant.size();i++){
             if(final_restaurant.get(i).isChecked()) {
-                Toast.makeText(getApplicationContext(), "체크된 식당" + final_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "체크된 식당" + final_restaurant.get(i).getName(), Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(getApplicationContext(),"체크 안된 식당"+final_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "체크XXXX 식당" + final_restaurant.get(i).getName(), Toast.LENGTH_SHORT).show();
             }
         }
 
