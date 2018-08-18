@@ -9,29 +9,26 @@ import java.util.ArrayList;
 
 public class finalActivity extends AppCompatActivity {
 
+    ArrayList<Restaurant> final_restaurant = new ArrayList<Restaurant>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final);
 
-        String str="";
-
-        boolean from_one=false;
-        boolean from_price=false;
-        boolean from_random=false;
-
-        ArrayList<Restaurant> final_restaurant = new ArrayList<Restaurant>();
 
         Intent intent = getIntent();
         final_restaurant = intent.getParcelableArrayListExtra("To final");
 
-
-        for(int i=0;i<final_restaurant.size();i++)
-        {
-            str = str + final_restaurant.get(i).isChecked() + "\n";
+        for(int i=0;i<final_restaurant.size();i++){
+            if(final_restaurant.get(i).isChecked()) {
+                Toast.makeText(getApplicationContext(), "체크된 식당" + final_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"체크 안된 식당"+final_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+            }
         }
 
-        Toast.makeText(getApplicationContext(),str,Toast.LENGTH_LONG).show();
 
 
     }
