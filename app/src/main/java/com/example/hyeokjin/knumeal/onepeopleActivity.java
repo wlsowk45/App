@@ -30,7 +30,7 @@ public class onepeopleActivity extends AppCompatActivity {
 
         //ArrayList<Restaurant> final_restaurant = new ArrayList<Restaurant>();
         Intent i = getIntent();
-        found_restaurant = i.getParcelableArrayListExtra("ToOne");
+        found_restaurant = i.getParcelableArrayListExtra("To one");
         ListView listView=(ListView)findViewById(R.id.listview);
         adapter=new PeopleAdapter();
         for(int j=0;j<found_restaurant.size();j++){
@@ -45,11 +45,11 @@ public class onepeopleActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 for(int i=0;i<found_restaurant.size();i++){
-                        found_restaurant.get(i).setChecked(adapter.getChecked(i));
-                        if(found_restaurant.get(i).isChecked()){
-                            //Toast.makeText(getApplicationContext(),"체크 된 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
-                            checked_restaurant.add(found_restaurant.get(i));
-                        }
+                    found_restaurant.get(i).setChecked(adapter.getChecked(i));
+                    if(found_restaurant.get(i).isChecked()){
+                        //Toast.makeText(getApplicationContext(),"체크 된 식당"+found_restaurant.get(i).getName(),Toast.LENGTH_SHORT).show();
+                        checked_restaurant.add(found_restaurant.get(i));
+                    }
 
                 }
 
@@ -99,21 +99,21 @@ public class onepeopleActivity extends AppCompatActivity {
             CheckBox checkBox=(CheckBox)view.findViewById(R.id.checkBox);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    item.setChecked(true);
-                   Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b){
+                        item.setChecked(true);
+                        Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
 
+                    }
+                    else{
+                        item.setChecked(false);
+                        Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
+
+                    }
                 }
-                else{
-                    item.setChecked(false);
-                    Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
+            });
 
-                }
-            }
-        });
-
-                return view;
+            return view;
 
         }
     }

@@ -26,7 +26,7 @@ public class peopleitemviewcod extends LinearLayout {
     public void init(Context context){
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.peopleitem,this,true);
-         textView=(TextView)findViewById(R.id.textView);
+        textView=(TextView)findViewById(R.id.textView);
         checkBox=(CheckBox)findViewById(R.id.checkBox);
         imageView=(ImageView)findViewById(R.id.imageView);
     }
