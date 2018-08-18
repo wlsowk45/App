@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -98,12 +99,14 @@ public class onepeopleActivity extends AppCompatActivity {
                 @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                 //  Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.checked,Toast.LENGTH_SHORT).show();
                     item.setChecked(true);
+                   Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
+
                 }
                 else{
-                    //Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.checked,Toast.LENGTH_SHORT).show();
                     item.setChecked(false);
+                    Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

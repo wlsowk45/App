@@ -11,7 +11,7 @@ public class Restaurant implements Parcelable {
     private double latitude;
     private String position;
     private int price;
-    private byte checked;
+    private int checked;
 
 
     public Restaurant(String name, double latitude, double longitude, int min_person, String position, int price) {
@@ -30,6 +30,7 @@ public class Restaurant implements Parcelable {
         min_person = in.readInt();
         position = in.readString();
         price = in.readInt();
+        checked=in.readInt();
     }
 
 
@@ -51,6 +52,7 @@ public class Restaurant implements Parcelable {
         dest.writeInt(min_person);
         dest.writeString(position);
         dest.writeInt(price);
+        dest.writeInt(checked);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -119,7 +121,9 @@ public class Restaurant implements Parcelable {
         if (checked == 0) {
             return false;
         }
-        return true;
+        else {
+            return true;
+        }
     }
 
     public void setChecked(boolean checked) {
