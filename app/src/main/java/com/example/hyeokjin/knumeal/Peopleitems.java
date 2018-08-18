@@ -4,21 +4,13 @@ import android.widget.CheckBox;
 
 public class Peopleitems {
 
-    String name;
-    boolean checking;
-    CheckBox checkBox;
+    private String name;
+    private boolean checked=true;
 
-    public Peopleitems(boolean checking) {
-        this.checking = checking;
+    public boolean isChecked() {
+        return checked;
     }
 
-    public boolean isChecking(CheckBox checkBox){
-        if(checkBox.isChecked())
-            return true;
-        else
-            return  false;
-
-    }
 
     public Peopleitems(String name) {
         this.name = name;
@@ -31,6 +23,10 @@ public class Peopleitems {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }
 

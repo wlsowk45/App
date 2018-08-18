@@ -12,7 +12,7 @@ public class Restaurant implements Parcelable {
     private double latitude;
     private String position;
     private int price;
-    private boolean checked;
+    private boolean checked=true;
 
 
     public Restaurant(String name,  double latitude, double longitude, int min_person, String position, int price)
