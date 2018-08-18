@@ -30,7 +30,7 @@ public class onepeopleActivity extends AppCompatActivity {
 
         //ArrayList<Restaurant> final_restaurant = new ArrayList<Restaurant>();
         Intent i = getIntent();
-        found_restaurant = i.getParcelableArrayListExtra("ToOne");
+        found_restaurant = i.getParcelableArrayListExtra("To one");
         ListView listView=(ListView)findViewById(R.id.listview);
         adapter=new PeopleAdapter();
         for(int j=0;j<found_restaurant.size();j++){

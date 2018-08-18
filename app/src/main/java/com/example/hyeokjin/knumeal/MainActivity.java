@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent3=new Intent(MainActivity.this,RandomAcitivity.class);
-                intent3.putParcelableArrayListExtra("ToRandom", restaurants);
+                Intent intent3=new Intent(MainActivity.this,onepeopleActivity.class);
+                intent3.putParcelableArrayListExtra("To one", restaurants);
                 startActivity(intent3);
             }
         });
