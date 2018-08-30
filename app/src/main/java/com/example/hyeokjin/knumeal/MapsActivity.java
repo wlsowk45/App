@@ -62,9 +62,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
-        final ArrayList<Restaurant> restaurants;
+        final ArrayList<Restaurant> result_restaurant;
         Intent intent = getIntent();
-        restaurants = intent.getParcelableArrayListExtra("ToMap");
+        result_restaurant = intent.getParcelableArrayListExtra("ToMap");
 
         //애니메이션 없이 LatLng로 옮김
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(
@@ -77,16 +77,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.animateCamera(zoom);
 
         ArrayList<MarkerOptions> markers = new ArrayList<MarkerOptions>();
-        for(int i=0;i<restaurants.size();i++)
-        {
+
             //MarkerOption에는 Position, Title, Snippet, Alpha, Icon
             MarkerOptions marker = new MarkerOptions();
-            marker.position(new LatLng(restaurants.get(i).getLatitude(),restaurants.get(i).getLongitude()));
-            marker.title(restaurants.get(i).getName());
-            marker.snippet("snippet은 여기");
+            marker.position(new LatLng(result_restaurant.get(0).getLatitude(),result_restaurant.get(0).getLongitude()));
+            marker.title(result_restaurant.get(0).getName());
+            marker.snippet("가격 :"+result_restaurant.get(0).getPrice());
             markers.add(marker);
             googleMap.addMarker(marker).showInfoWindow();
-        }
+
 
 
        /* mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
