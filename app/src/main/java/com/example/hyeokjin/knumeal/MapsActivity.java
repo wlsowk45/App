@@ -1,6 +1,7 @@
 package com.example.hyeokjin.knumeal;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -33,14 +34,18 @@ public class MapsActivity extends FragmentActivity
         ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMyLocationButtonClickListener {
 
+    private boolean isGPSEnabled = false;
+    private boolean isNetWorkEnabled = false;
     private GoogleMap mMap;
-    LocationManager locationManager;
+    private LocationManager locationManager=null;
     UiSettings mapSettings;
     TextView textView_distance,textView_time;
 
     double mLatitude;
     double mLongitude;
     ArrayList<Restaurant> result_restaurant = new ArrayList<Restaurant>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,8 @@ public class MapsActivity extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
 
         if (mMap != null) {
             try {
@@ -77,9 +84,6 @@ public class MapsActivity extends FragmentActivity
 
         }
 
-
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
         //GPS 켜져있는지 체크
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             //GPS 설정 화면으
@@ -88,6 +92,10 @@ public class MapsActivity extends FragmentActivity
             startActivity(intent_GPS);
             finish();
         }
+
+        /////수정중
+        isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        isNetWorkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
 
         //마시멜로 이상
@@ -104,6 +112,9 @@ public class MapsActivity extends FragmentActivity
         } else { //마시멜로 아래
             requestMyLocation();
         }
+
+
+
 
     }
 
@@ -135,7 +146,12 @@ public class MapsActivity extends FragmentActivity
             return;
         }
         //요청 최소시간 1000ms(1초) 최소 거리 10미
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 10, locationListener);
+        if(isGPSEnabled)
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 10, locationListener);
+        else if(isNetWorkEnabled)
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,100,1,locationListener);
+        else
+            Toast.makeText(getApplicationContext(),"GPS를 받아올 수 없습니다.",Toast.LENGTH_SHORT).show();
     }
 
     //위치정보 구하기 리스너
