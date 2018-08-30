@@ -68,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //애니메이션 없이 LatLng로 옮김
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(
-                new LatLng(35.885501,128.611328)    //쪽문 CU
+                new LatLng(result_restaurant.get(0).getLatitude(),result_restaurant.get(0).getLongitude())
         ));
 
         //구글맵에서 zoom level 은 1~23

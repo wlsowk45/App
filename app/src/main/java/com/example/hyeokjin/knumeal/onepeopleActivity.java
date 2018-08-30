@@ -80,6 +80,7 @@ public class onepeopleActivity extends AppCompatActivity {
                 Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
                 intent.putParcelableArrayListExtra("To final", checked_restaurant);
                 startActivity(intent);
+                checked_restaurant.clear();
 
             }
         });

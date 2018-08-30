@@ -35,9 +35,16 @@ public class finalActivity extends AppCompatActivity {
         random_num = getRandomIntNum(0,final_restaurant.size()-1);
         random_result = final_restaurant.get(random_num).getName();
 
+        result_restaurant.clear();
         result_restaurant.add(final_restaurant.get(random_num));
-        //Toast.makeText(getApplicationContext(),random_num+final_restaurant.get(random_num).getName(),Toast.LENGTH_SHORT).show();
+        String str = "final : ";
+        for(int i=0;i<final_restaurant.size();i++)
+            str = str + final_restaurant.get(i).getName() + "\n";
+        Toast.makeText(getApplicationContext(),str, Toast.LENGTH_SHORT).show();
         textView.setText(random_result);
+
+        random_num=0;
+        random_result="";
 
 
         map_button.setOnClickListener(new View.OnClickListener(){
