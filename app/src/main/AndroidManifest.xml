@@ -36,9 +36,12 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".onepeopleActivity" />
-        <activity android:name=".HowmuchActivity" />
-        <activity android:name=".finalActivity" />
+        <activity android:name=".onepeopleActivity"
+                    android:label="선택의 시간"/>
+        <activity android:name=".HowmuchActivity"
+                    android:label="가격대"/>
+        <activity android:name=".finalActivity"
+                    android:label="랜덤가즈아~~"/>
     </application>
 
 </manifest>
