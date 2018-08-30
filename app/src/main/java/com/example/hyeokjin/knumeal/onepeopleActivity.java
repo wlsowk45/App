@@ -34,6 +34,10 @@ public class onepeopleActivity extends AppCompatActivity {
         final ListView listView=(ListView)findViewById(R.id.listview);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
+        if(found_restaurant.size()==0){
+            Toast.makeText(onepeopleActivity.this,"조건에 부합하는 식당이 존재하지 않습니다",Toast.LENGTH_SHORT).show();
+        }
+
 
         adapter=new PeopleAdapter();
         for(int j=0;j<found_restaurant.size();j++){
@@ -45,17 +49,29 @@ public class onepeopleActivity extends AppCompatActivity {
         final CheckBox allcheck=(CheckBox)findViewById(R.id.checkBox2);
         count=adapter.getCount();
 
-        allcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for(int j=0;j<count;j++){
-                    listView.setItemChecked(j,false);
-                }
 
-                adapter.notifyDataSetChanged();
+        allcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    for(int j=0;j<count;j++){
+                        adapter.OnChecked(j);
+
+                    }
+
+                    adapter.notifyDataSetChanged();
+
+                }
+                else{
+                    for(int j=0;j<count;j++){
+                        adapter.OffChecked(j);
+
+                    }
+
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
-
 
 
 
@@ -76,11 +92,16 @@ public class onepeopleActivity extends AppCompatActivity {
                     }
 
                 }
+                if(checked_restaurant.size()==0){
+                    Toast.makeText(onepeopleActivity.this,"식당을 선택해주세요",Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
-                intent.putParcelableArrayListExtra("To final", checked_restaurant);
-                startActivity(intent);
-                checked_restaurant.clear();
+                    Intent intent = new Intent(onepeopleActivity.this, finalActivity.class);
+                    intent.putParcelableArrayListExtra("To final", checked_restaurant);
+                    startActivity(intent);
+                    checked_restaurant.clear();
+                }
 
             }
         });
@@ -89,27 +110,7 @@ public class onepeopleActivity extends AppCompatActivity {
     }
     class PeopleAdapter extends BaseAdapter {
 
-
-
         ArrayList<Peopleitems> items = new ArrayList<Peopleitems>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         @Override
         public int getCount() {
@@ -133,6 +134,13 @@ public class onepeopleActivity extends AppCompatActivity {
         public boolean getChecked(int i)
         {
             return items.get(i).isChecked();
+        }
+
+        public void OnChecked(int i){
+            items.get(i).checked=true;
+        }
+        public void OffChecked(int i){
+            items.get(i).checked=false;
         }
 
         @Override
@@ -160,12 +168,10 @@ public class onepeopleActivity extends AppCompatActivity {
                     if(b){
                         item.setChecked(true);
 
-                        Toast.makeText(getApplicationContext(),"체크된 식당"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
-
+                        
                     }
                     else{
                         item.setChecked(false);
-                        Toast.makeText(getApplicationContext(),"체크X"+item.getName()+item.isChecked(),Toast.LENGTH_SHORT).show();
 
 
                     }
