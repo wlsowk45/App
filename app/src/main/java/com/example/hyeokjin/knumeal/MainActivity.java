@@ -91,16 +91,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button4.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent4=new Intent (MainActivity.this,MapsActivity.class);
-                intent4.putParcelableArrayListExtra("ToMap", restaurants);
-                startActivity(intent4);
-            }
-
-        });
-
 
 
         /*

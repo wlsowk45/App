@@ -29,7 +29,6 @@ public class onepeopleActivity extends AppCompatActivity {
 
 
 
-        //ArrayList<Restaurant> final_restaurant = new ArrayList<Restaurant>();
         Intent i = getIntent();
         found_restaurant = i.getParcelableArrayListExtra("To one");
         final ListView listView=(ListView)findViewById(R.id.listview);
@@ -78,9 +77,8 @@ public class onepeopleActivity extends AppCompatActivity {
 
                 }
 
-
                 Intent intent=new Intent(onepeopleActivity.this,finalActivity.class);
-                intent.putParcelableArrayListExtra("To final", found_restaurant);
+                intent.putParcelableArrayListExtra("To final", checked_restaurant);
                 startActivity(intent);
 
             }
