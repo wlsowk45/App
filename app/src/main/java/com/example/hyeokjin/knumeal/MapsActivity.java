@@ -143,15 +143,16 @@ public class MapsActivity extends FragmentActivity
     public void requestMyLocation(){
         if(ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(getApplicationContext(),"GPS를 받아올 수 없습니다.",Toast.LENGTH_SHORT).show();
             return;
         }
         //요청 최소시간 1000ms(1초) 최소 거리 10미
-        if(isGPSEnabled)
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 10, locationListener);
-        else if(isNetWorkEnabled)
+        //if(isGPSEnabled)
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+        //else if(isNetWorkEnabled)
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,100,1,locationListener);
-        else
-            Toast.makeText(getApplicationContext(),"GPS를 받아올 수 없습니다.",Toast.LENGTH_SHORT).show();
+        //else
+
     }
 
     //위치정보 구하기 리스너
@@ -243,6 +244,15 @@ public class MapsActivity extends FragmentActivity
         marker.snippet(result_restaurant.get(0).getLatitude()+" "+result_restaurant.get(0).getLongitude());
         markers.add(marker);
         googleMap.addMarker(marker).showInfoWindow();
+
+
+        MarkerOptions marker_my = new MarkerOptions();
+        marker_my.position(myPosition);
+        marker_my.title("my position");
+        marker_my.snippet(mLatitude+" "+mLongitude);
+        markers.add(marker_my);
+        googleMap.addMarker(marker_my).showInfoWindow();
+
 
 
 
