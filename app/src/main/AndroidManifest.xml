@@ -55,7 +55,7 @@
         <activity
             android:name=".finalActivity"
             android:label="랜덤가즈아~~" />
-        <activity android:name=".Whereactivity"></activity>
+        <activity android:name=".Whereactivity" />
     </application>
 
 </manifest>

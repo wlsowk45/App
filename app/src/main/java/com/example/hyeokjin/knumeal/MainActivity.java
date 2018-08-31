@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    MyApplication myApplication;
+    ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+    ArrayList<Restaurant> onerestaurants=new ArrayList<Restaurant>();
+    ArrayList<Restaurant> delivery_restaurant = new ArrayList<Restaurant>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
         Button button=(Button)findViewById(R.id.button);
         Button button2=(Button)findViewById(R.id.button2);
         Button button3=(Button)findViewById(R.id.button3);
+        Button button4=(Button)findViewById(R.id.button5);
+
+        restaurants.add(new Restaurant("북경반점", 35.8857360, 128.6109280, 2,"Hall_gate",4000,"053-952-4810",1));
+        restaurants.add(new Restaurant("해금강", 35.8851460, 128.6121580, 2,"Hall_gate",3000,"053-941-5289",1));
 
 
-        final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-        final ArrayList<Restaurant> onerestaurants=new ArrayList<Restaurant>();
-
+        /*
         restaurants.add(new Restaurant("밥버거", 35.8855700, 128.6096760, 1,"Hall_gate",3000));
         restaurants.add(new Restaurant("종이밥", 35.8855620, 128.6104720, 1,"Hall_gate",3000));
         restaurants.add(new Restaurant("우리분식", 35.8849900, 128.6098150, 2,"Hall_gate",5000));
@@ -41,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("정글로", 35.8835710, 128.6100380, 2,"Hall_gate",7000));
         restaurants.add(new Restaurant("세계지도", 35.8852160, 128.6119890, 1,"Hall_gate",4000));
         restaurants.add(new Restaurant("몬나니떡볶이", 35.8856980, 128.6107540, 2,"Hall_gate",4000));
-        restaurants.add(new Restaurant("북경반점", 35.8857360, 128.6109280, 2,"Hall_gate",4000));
-        restaurants.add(new Restaurant("해금강", 35.8851460, 128.6121580, 2,"Hall_gate",3000));
         restaurants.add(new Restaurant("쪽문분식", 35.8857690, 128.6102570, 2,"Hall_gate",4000));
         restaurants.add(new Restaurant("금계찜닭", 35.8857690, 128.6102570, 2,"Hall_gate",7000));
         restaurants.add(new Restaurant("다이가쿠", 35.8851550, 128.6098550, 2,"Hall_gate",10000));
@@ -55,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("짬마담", 35.8848200, 128.6100720, 2,"Hall_gate",8000));
         restaurants.add(new Restaurant("닭 튀기는남자", 35.8848200, 128.6100720, 2,"Hall_gate",8000));
         //쪽문
-
-
 
         restaurants.add(new Restaurant("한솥", 35.884403, 128.613944, 1,"Main_gate",3000));
         restaurants.add(new Restaurant("모이다식탁", 35.8847810, 128.6136590, 1,"Main_gate",5500));
@@ -77,17 +77,7 @@ public class MainActivity extends AppCompatActivity {
         //정문
 
         restaurants.add(new Restaurant("밥버거2323", 35.834213, 128.612467, 2,"North_gate",8000));
-
-
-
-
-
-
-
-
-
-
-
+        */
 
 
         //인원수 클릭했을때
@@ -115,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+
         //올랜덤 클릭했을때
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +115,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent3);
             }
         });
+
+        //배달 클릭
+        button4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                for(int j=0;j<restaurants.size();j++) {
+                    if (restaurants.get(j).getDelivery() == 1) {
+                        delivery_restaurant.add(restaurants.get(j));
+                    }
+                }
+
+                Intent intent4=new Intent(MainActivity.this,onepeopleActivity.class);
+                intent4.putParcelableArrayListExtra("To one", delivery_restaurant);
+                startActivity(intent4);
+            }
+        });
+
 
 
 
