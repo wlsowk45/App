@@ -18,6 +18,7 @@
         android:layout_weight="8"
         map:mapType="normal"
         map:uiZoomControls="false"
+
         tools:context=".MapsActivity" />
 
     <TextView
