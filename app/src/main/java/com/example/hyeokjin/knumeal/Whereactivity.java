@@ -27,16 +27,16 @@ public class Whereactivity extends AppCompatActivity {
         where_restaurant = i.getParcelableArrayListExtra("To where");
 
         for(int j=0;j<where_restaurant.size();j++){
-            if(where_restaurant.get(j).getPosition()=="Main_gate"){
+            if(where_restaurant.get(j).getPosition().equals("Main_gate")){
                 main_restaurant.add(where_restaurant.get(j));
             }
-            if(where_restaurant.get(j).getPosition()=="Hall_gate"){
+            if(where_restaurant.get(j).getPosition().equals("Hall_gate")){
                 hall_restaurant.add(where_restaurant.get(j));
             }
-            if(where_restaurant.get(j).getPosition()=="Main_gate"||where_restaurant.get(j).getPosition()=="Hall_gate"){
+            if(where_restaurant.get(j).getPosition().equals("Main_gate")||where_restaurant.get(j).getPosition().equals("Hall_gate")){
                 mainhall_restaurant.add(where_restaurant.get(j));
             }
-            if(where_restaurant.get(j).getPosition()=="North_gate") {
+            if(where_restaurant.get(j).getPosition().equals("North_gate")){
                 north_restaurant.add(where_restaurant.get(j));
             }
 

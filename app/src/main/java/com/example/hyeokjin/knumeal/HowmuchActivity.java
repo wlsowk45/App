@@ -91,8 +91,8 @@ public class HowmuchActivity extends AppCompatActivity {
                     }
 
                     //HowMuch -> onepeople
-                    Intent intent=new Intent(HowmuchActivity.this,onepeopleActivity.class);
-                    intent.putParcelableArrayListExtra("To one", find_restaurant);
+                    Intent intent=new Intent(HowmuchActivity.this,Whereactivity.class);
+                    intent.putParcelableArrayListExtra("To where", find_restaurant);
                     startActivity(intent);
                     find_restaurant.clear();
 
