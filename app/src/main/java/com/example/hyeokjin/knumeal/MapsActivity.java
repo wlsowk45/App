@@ -34,15 +34,21 @@ public class MapsActivity extends FragmentActivity
         implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMyLocationButtonClickListener {
 
+    private static final String TAG = "googlemap_tag";
     private boolean isGPSEnabled = false;
     private boolean isNetWorkEnabled = false;
     private GoogleMap mMap;
     private LocationManager locationManager = null;
+    private double parseBefore;
+    private double distance; // 식당 ~ 내 위치
+
     UiSettings mapSettings;
     TextView textView_distance, textView_time;
 
-    double mLatitude;
-    double mLongitude;
+    private double mLatitude;
+    private double mLongitude;
+    public LatLng myPosition;
+    public LatLng restaurant_pos;
     ArrayList<Restaurant> result_restaurant = new ArrayList<Restaurant>();
 
 
@@ -57,6 +63,7 @@ public class MapsActivity extends FragmentActivity
         //표시할 list 받음
         Intent intent = getIntent();
         result_restaurant = intent.getParcelableArrayListExtra("ToMap");
+        restaurant_pos = new LatLng(result_restaurant.get(0).getLatitude(),result_restaurant.get(0).getLongitude());
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -68,6 +75,9 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void updateLocationUI() {
+
+        Log.d(TAG,"updateLocationUI : \n");
+
         if (mMap == null) return;
 
         try {
@@ -82,6 +92,8 @@ public class MapsActivity extends FragmentActivity
 }
 
     public boolean onMyLocationButtonClick(){
+        Log.d(TAG,"onMyLocationButtonClick : \n");
+
         Toast.makeText(this,"MyLocation button clicked",Toast.LENGTH_SHORT).show();
         return false;
     }
@@ -89,6 +101,9 @@ public class MapsActivity extends FragmentActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        Log.d(TAG,"onRequestPermissionsResult : \n");
+
         //ACCESS_COARSE_LOCATION 권한
         if(requestCode==1){
             //권한받음
@@ -105,6 +120,9 @@ public class MapsActivity extends FragmentActivity
 
     //나의 위치 요청
     public void requestMyLocation(){
+
+        Log.d(TAG,"requestMyLocation : \n");
+
         if(ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             Toast.makeText(getApplicationContext(),"GPS를 받아올 수 없습니다.",Toast.LENGTH_SHORT).show();
@@ -142,10 +160,14 @@ public class MapsActivity extends FragmentActivity
                 Toast.makeText(getApplicationContext(),"get by NETWORK",Toast.LENGTH_SHORT).show();
             }
 
-            // 맵생성
-            SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
-            //콜백클래스 설정
-            mapFragment.getMapAsync(MapsActivity.this);
+            myPosition = new LatLng(mLatitude,mLongitude);
+
+            parseBefore = getDistance();
+            distance = Double.parseDouble(String.format("%.2f",parseBefore));
+
+            textView_distance.setText("거리 : "+distance+"m");
+            textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
+
         }
 
         @Override
@@ -168,58 +190,51 @@ public class MapsActivity extends FragmentActivity
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    public double getDistance(LatLng LatLng1, LatLng LatLng2) {
+    public double getDistance() {
         double distance;
         Location locationA = new Location("A");
-        locationA.setLatitude(LatLng1.latitude);
-        locationA.setLongitude(LatLng1.longitude);
+        locationA.setLatitude(myPosition.latitude);
+        locationA.setLongitude(myPosition.longitude);
         Location locationB = new Location("B");
-        locationB.setLatitude(LatLng2.latitude);
-        locationB.setLongitude(LatLng2.longitude);
+        locationB.setLatitude(restaurant_pos.latitude);
+        locationB.setLongitude(restaurant_pos.longitude);
         distance = locationA.distanceTo(locationB);
 
         return distance;
     }
 
 
+
     @Override
     public void onMapReady(final GoogleMap googleMap) {
 
+        Log.d(TAG,"onMapReady : \n");
+
         mMap = googleMap;
 
-        double parseBefore;
-        double distance; // 식당 ~ 내 위치
-
-        LatLng myPosition = new LatLng(mLatitude,mLongitude);
-        LatLng restaurant_pos = new LatLng(result_restaurant.get(0).getLatitude(),result_restaurant.get(0).getLongitude());
         LatLng ilchungdam = new LatLng(35.888605,128.612187);
-        LatLng center = new LatLng(mLatitude+restaurant_pos.latitude/2,mLongitude+restaurant_pos.longitude/2);
+
+        ArrayList<MarkerOptions> markers = new ArrayList<MarkerOptions>();
+
+        //MarkerOption에는 Position, Title, Snippet, Alpha, Icon
+        MarkerOptions marker = new MarkerOptions();
+        marker.position(restaurant_pos);
+        marker.title(result_restaurant.get(0).getName());
+        marker.snippet(result_restaurant.get(0).getLatitude()+" "+result_restaurant.get(0).getLongitude());
+        markers.add(marker);
+        mMap.addMarker(marker).showInfoWindow();
+
 
         //Toast.makeText(getApplicationContext(),"lat = "+mLatitude+"\nlong = "+mLongitude,Toast.LENGTH_SHORT).show();
-        parseBefore = getDistance(myPosition,restaurant_pos);
-        distance = Double.parseDouble(String.format("%.2f",parseBefore));
+        //parseBefore = getDistance();
+        //distance = Double.parseDouble(String.format("%.2f",parseBefore));
 
-        textView_distance.setText("거리 : "+distance+"m");
-        textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
+        //textView_distance.setText("거리 : "+distance+"m");
+        //textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
 
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-
-        if (mMap != null) {
-            try {
-
-                mapSettings = mMap.getUiSettings();
-                mMap.setMyLocationEnabled(false);
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                mapSettings.setZoomControlsEnabled(true);
-
-
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            }
-
-        }
 
         //GPS 켜져있는지 체크
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -229,6 +244,23 @@ public class MapsActivity extends FragmentActivity
             startActivity(intent_GPS);
             finish();
         }
+
+
+        if (mMap != null) {
+            try {
+
+                mapSettings = mMap.getUiSettings();
+                mMap.setMyLocationEnabled(true);
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                mapSettings.setZoomControlsEnabled(true);
+
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
 
         /////수정중
         isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -253,27 +285,8 @@ public class MapsActivity extends FragmentActivity
 
         updateLocationUI();
 
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ilchungdam,15));//일청담
 
-
-        CameraPosition cp = new CameraPosition.Builder().target(myPosition).zoom(15).build();
-        //애니메이션 없이 LatLng로 옮김
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(ilchungdam));//일청담
-
-            //구글맵에서 zoom level 은 1~23
-        //CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-            //애니메이션 적용
-        //googleMap.animateCamera(zoom);
-
-        ArrayList<MarkerOptions> markers = new ArrayList<MarkerOptions>();
-
-        //MarkerOption에는 Position, Title, Snippet, Alpha, Icon
-        MarkerOptions marker = new MarkerOptions();
-        marker.position(restaurant_pos);
-        marker.title(result_restaurant.get(0).getName());
-        marker.snippet(result_restaurant.get(0).getLatitude()+" "+result_restaurant.get(0).getLongitude());
-        markers.add(marker);
-        googleMap.addMarker(marker).showInfoWindow();
 
     }
 }
