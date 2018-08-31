@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000));
         //정문
 
+        restaurants.add(new Restaurant("밥버거2323", 35.834213, 128.612467, 2,"North_gate",8000));
+
+
 
 
 
@@ -97,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //main->Onepeople
-                Intent intent=new Intent(MainActivity.this,onepeopleActivity.class);
-                intent.putParcelableArrayListExtra("To one", onerestaurants);
+                Intent intent=new Intent(MainActivity.this,Whereactivity.class);
+                intent.putParcelableArrayListExtra("To where", onerestaurants);
                 startActivity(intent);
             }
         });
@@ -106,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2=new Intent(MainActivity.this,HowmuchActivity.class);
-                intent2.putParcelableArrayListExtra("ToMuch", restaurants);
+                Intent intent2=new Intent(MainActivity.this,Whereactivity.class);
+                intent2.putParcelableArrayListExtra("To where", restaurants);
                 startActivity(intent2);
             }
         });
@@ -115,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent3=new Intent(MainActivity.this,onepeopleActivity.class);
-                intent3.putParcelableArrayListExtra("To one", restaurants);
+                Intent intent3=new Intent(MainActivity.this,Whereactivity.class);
+                intent3.putParcelableArrayListExtra("To where", restaurants);
                 startActivity(intent3);
             }
         });
