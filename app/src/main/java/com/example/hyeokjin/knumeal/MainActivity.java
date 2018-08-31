@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Button button4=(Button)findViewById(R.id.button4);
 
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+        final ArrayList<Restaurant> onerestaurants=new ArrayList<Restaurant>();
 
         restaurants.add(new Restaurant("밥버거", 35.8855700, 128.6096760, 1,"Hall_gate",3000));
         restaurants.add(new Restaurant("종이밥", 35.8855620, 128.6104720, 1,"Hall_gate",3000));
@@ -52,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("예전 손국수집", 35.8848200, 128.6100720, 2,"Hall_gate",7000));
         restaurants.add(new Restaurant("짬마담", 35.8848200, 128.6100720, 2,"Hall_gate",8000));
         restaurants.add(new Restaurant("닭 튀기는남자", 35.8848200, 128.6100720, 2,"Hall_gate",8000));
+        //쪽문
+
+
+
         restaurants.add(new Restaurant("한솥", 35.884403, 128.613944, 1,"Main_gate",3000));
         restaurants.add(new Restaurant("모이다식탁", 35.8847810, 128.6136590, 1,"Main_gate",5500));
         restaurants.add(new Restaurant("불멸의 떡볶이", 35.8849060, 128.6139230, 1,"Main_gate",4000));
@@ -68,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("충만치킨", 35.8848820, 128.6133530, 2,"Main_gate",8000));
         restaurants.add(new Restaurant("거침없이 파닭", 35.8852660, 128.6123780, 2,"Main_gate",5500));
         restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000));
-
+        //정문
 
 
 
@@ -85,9 +90,15 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //main->ToHow
-                Intent intent=new Intent(MainActivity.this,HowmanyActivity.class);
-                intent.putParcelableArrayListExtra("ToMany", restaurants);
+                for(int j=0;j<restaurants.size();j++) {
+                    if (restaurants.get(j).getMin_person() == 1) {
+                        onerestaurants.add(restaurants.get(j));
+                    }
+                }
+
+                //main->Onepeople
+                Intent intent=new Intent(MainActivity.this,onepeopleActivity.class);
+                intent.putParcelableArrayListExtra("To one", onerestaurants);
                 startActivity(intent);
             }
         });
