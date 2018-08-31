@@ -30,8 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity
-        implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback,
+        implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnMyLocationButtonClickListener {
 
     private boolean isGPSEnabled = false;
@@ -73,7 +72,7 @@ public class MapsActivity extends FragmentActivity
             try {
 
                 mapSettings = mMap.getUiSettings();
-                mMap.setMyLocationEnabled(true);
+                mMap.setMyLocationEnabled(false);
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 mapSettings.setZoomControlsEnabled(true);
 
@@ -113,15 +112,14 @@ public class MapsActivity extends FragmentActivity
             requestMyLocation();
         }
 
-
-
-
     }
+
 
     public boolean onMyLocationButtonClick(){
         Toast.makeText(this,"MyLocation button clicked",Toast.LENGTH_SHORT).show();
         return false;
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -148,9 +146,9 @@ public class MapsActivity extends FragmentActivity
         }
         //요청 최소시간 1000ms(1초) 최소 거리 10미
         //if(isGPSEnabled)
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
         //else if(isNetWorkEnabled)
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,100,1,locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,1000,1,locationListener);
         //else
 
     }
@@ -166,11 +164,19 @@ public class MapsActivity extends FragmentActivity
             //나의 위치를 한번만 가져오기 위해
             locationManager.removeUpdates(locationListener);
 
-            //위도 경도
-            mLatitude = location.getLatitude();   //위도
-            mLongitude = location.getLongitude(); //경도
+            if(location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+                //위도 경도
+                mLatitude = location.getLatitude();   //위도
+                mLongitude = location.getLongitude(); //경도
+                Toast.makeText(getApplicationContext(),"get by GPS",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                mLatitude = location.getLatitude();   //위도
+                mLongitude = location.getLongitude(); //경도
+                Toast.makeText(getApplicationContext(),"get by NETWORK",Toast.LENGTH_SHORT).show();
+            }
 
-            //맵생성
+            // 맵생성
             SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
             //콜백클래스 설정
             mapFragment.getMapAsync(MapsActivity.this);
@@ -215,15 +221,17 @@ public class MapsActivity extends FragmentActivity
 
         mMap = googleMap;
 
+        double parseBefore;
         double distance; // 식당 ~ 내 위치
 
         LatLng myPosition = new LatLng(mLatitude,mLongitude);
         LatLng restaurant_pos = new LatLng(result_restaurant.get(0).getLatitude(),result_restaurant.get(0).getLongitude());
 
         Toast.makeText(getApplicationContext(),"lat = "+mLatitude+"\nlong = "+mLongitude,Toast.LENGTH_SHORT).show();
-        distance = getDistance(myPosition,restaurant_pos);
+        parseBefore = getDistance(myPosition,restaurant_pos);
+        distance = Double.parseDouble(String.format("%.2f",parseBefore));
 
-        textView_distance.setText("거리 : "+distance+"km");
+        textView_distance.setText("거리 : "+distance+"m");
         textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
 
 
