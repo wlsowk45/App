@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -36,14 +37,13 @@ public class MapsActivity extends FragmentActivity
     private boolean isGPSEnabled = false;
     private boolean isNetWorkEnabled = false;
     private GoogleMap mMap;
-    private LocationManager locationManager=null;
+    private LocationManager locationManager = null;
     UiSettings mapSettings;
-    TextView textView_distance,textView_time;
+    TextView textView_distance, textView_time;
 
     double mLatitude;
     double mLongitude;
     ArrayList<Restaurant> result_restaurant = new ArrayList<Restaurant>();
-
 
 
     @Override
@@ -51,13 +51,12 @@ public class MapsActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        textView_distance=(TextView)findViewById(R.id.textView_distance);
-        textView_time=(TextView)findViewById(R.id.textView_time);
+        textView_distance = (TextView) findViewById(R.id.textView_distance);
+        textView_time = (TextView) findViewById(R.id.textView_time);
 
         //표시할 list 받음
         Intent intent = getIntent();
         result_restaurant = intent.getParcelableArrayListExtra("ToMap");
-
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -65,55 +64,22 @@ public class MapsActivity extends FragmentActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-
-        if (mMap != null) {
-            try {
-
-                mapSettings = mMap.getUiSettings();
-                mMap.setMyLocationEnabled(false);
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                mapSettings.setZoomControlsEnabled(true);
-
-
-            }catch(SecurityException e){
-                e.printStackTrace();
-            }
-
-        }
-
-        //GPS 켜져있는지 체크
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            //GPS 설정 화면으
-            Intent intent_GPS = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            intent_GPS.addCategory(Intent.CATEGORY_DEFAULT);
-            startActivity(intent_GPS);
-            finish();
-        }
-
-        /////수정중
-        isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        isNetWorkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
-
-        //마시멜로 이상
-        if (Build.VERSION.SDK_INT >= 23) {
-            //권한 없을경우
-            if (ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-                    ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-            //권한 없을경우
-            else {
-                requestMyLocation();
-            }
-        } else { //마시멜로 아래
-            requestMyLocation();
-        }
 
     }
 
+    private void updateLocationUI() {
+        if (mMap == null) return;
+
+        try {
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        }
+         catch( SecurityException e1){
+
+        Log.e("Exception %s", e1.getMessage());
+    }
+
+}
 
     public boolean onMyLocationButtonClick(){
         Toast.makeText(this,"MyLocation button clicked",Toast.LENGTH_SHORT).show();
@@ -226,8 +192,10 @@ public class MapsActivity extends FragmentActivity
 
         LatLng myPosition = new LatLng(mLatitude,mLongitude);
         LatLng restaurant_pos = new LatLng(result_restaurant.get(0).getLatitude(),result_restaurant.get(0).getLongitude());
+        LatLng ilchungdam = new LatLng(35.888605,128.612187);
+        LatLng center;
 
-        Toast.makeText(getApplicationContext(),"lat = "+mLatitude+"\nlong = "+mLongitude,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"lat = "+mLatitude+"\nlong = "+mLongitude,Toast.LENGTH_SHORT).show();
         parseBefore = getDistance(myPosition,restaurant_pos);
         distance = Double.parseDouble(String.format("%.2f",parseBefore));
 
@@ -235,13 +203,67 @@ public class MapsActivity extends FragmentActivity
         textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
 
 
-        //애니메이션 없이 LatLng로 옮김
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(myPosition));
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        //구글맵에서 zoom level 은 1~23
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-        //애니메이션 적용
-        googleMap.animateCamera(zoom);
+
+        if (mMap != null) {
+            try {
+
+                mapSettings = mMap.getUiSettings();
+                mMap.setMyLocationEnabled(false);
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                mapSettings.setZoomControlsEnabled(true);
+
+
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        //GPS 켜져있는지 체크
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            //GPS 설정 화면으
+            Intent intent_GPS = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            intent_GPS.addCategory(Intent.CATEGORY_DEFAULT);
+            startActivity(intent_GPS);
+            finish();
+        }
+
+        /////수정중
+        isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        isNetWorkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+
+        //마시멜로 이상
+        if (Build.VERSION.SDK_INT >= 23) {
+            //권한 없을경우
+            if (ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+            //권한 있을경우
+            else {
+                requestMyLocation();
+            }
+        } else { //마시멜로 아래
+            requestMyLocation();
+        }
+
+
+        updateLocationUI();
+
+
+
+        CameraPosition cp = new CameraPosition.Builder().target(ilchungdam).zoom(15).build();
+        //애니메이션 없이 LatLng로 옮김
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp)));
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(ilchungdam));//일청담
+
+            //구글맵에서 zoom level 은 1~23
+        //CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+            //애니메이션 적용
+        //googleMap.animateCamera(zoom);
 
         ArrayList<MarkerOptions> markers = new ArrayList<MarkerOptions>();
 
@@ -253,39 +275,5 @@ public class MapsActivity extends FragmentActivity
         markers.add(marker);
         googleMap.addMarker(marker).showInfoWindow();
 
-
-        MarkerOptions marker_my = new MarkerOptions();
-        marker_my.position(myPosition);
-        marker_my.title("my position");
-        marker_my.snippet(mLatitude+" "+mLongitude);
-        markers.add(marker_my);
-        googleMap.addMarker(marker_my).showInfoWindow();
-
-
-
-
-       /* mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng point) {
-                MarkerOptions mOptions = new MarkerOptions();
-                // 마커 타이틀
-                mOptions.title("마커 좌표");
-                Double latitude = point.latitude;//위도
-                Double longitude = point.longitude;//경도
-                mOptions.snippet(latitude.toString()+","+longitude.toString());
-                //latlng : 위도 경도 쌍을 나타냄
-                mOptions.position(new LatLng(latitude,longitude));
-                //마커(핀) 추가
-                googleMap.addMarker(mOptions);
-            }
-        });*/
-
-        // Add a marker in Sydney and move the camera
-
-        /*
-        LatLng seoul_station = new LatLng(37.555744, 126.970431);
-        mMap.addMarker(new MarkerOptions().position(seoul_station).title("서울역"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(seoul_station));
-        */
     }
 }
