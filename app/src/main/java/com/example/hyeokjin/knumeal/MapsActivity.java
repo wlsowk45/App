@@ -193,7 +193,7 @@ public class MapsActivity extends FragmentActivity
         LatLng myPosition = new LatLng(mLatitude,mLongitude);
         LatLng restaurant_pos = new LatLng(result_restaurant.get(0).getLatitude(),result_restaurant.get(0).getLongitude());
         LatLng ilchungdam = new LatLng(35.888605,128.612187);
-        LatLng center;
+        LatLng center = new LatLng(mLatitude+restaurant_pos.latitude/2,mLongitude+restaurant_pos.longitude/2);
 
         //Toast.makeText(getApplicationContext(),"lat = "+mLatitude+"\nlong = "+mLongitude,Toast.LENGTH_SHORT).show();
         parseBefore = getDistance(myPosition,restaurant_pos);
@@ -255,9 +255,9 @@ public class MapsActivity extends FragmentActivity
 
 
 
-        CameraPosition cp = new CameraPosition.Builder().target(ilchungdam).zoom(15).build();
+        CameraPosition cp = new CameraPosition.Builder().target(myPosition).zoom(15).build();
         //애니메이션 없이 LatLng로 옮김
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp)));
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cp));
         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(ilchungdam));//일청담
 
             //구글맵에서 zoom level 은 1~23
