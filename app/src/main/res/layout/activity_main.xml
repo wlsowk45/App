@@ -12,27 +12,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="올랜덤" />
+        android:adjustViewBounds="true"
+        android:drawableLeft="@drawable/random"
+        android:fontFamily="@font/joseonilbo"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:text="올랜덤"
+        android:textIsSelectable="false"
+        android:textSize="40dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="혼밥" />
+        android:fontFamily="@font/joseonilbo"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:text="혼밥"
+        android:textSize="40dp"
+        android:drawableLeft="@drawable/random"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="가격으로 정하기" />
+        android:drawableLeft="@drawable/random"
+        android:fontFamily="@font/joseonilbo"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:text="가격으로 정하기"
+        android:textSize="40dp"
+        android:textStyle="normal" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="시켜먹자" />
+        android:drawableLeft="@drawable/random"
+        android:fontFamily="@font/joseonilbo"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:text="시켜먹자"
+        android:textSize="40dp"
+        android:textStyle="normal"
+
+
+        />
 
 </LinearLayout>
