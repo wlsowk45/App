@@ -15,7 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_weight="1"
-            android:text="식당 이름" />
+            android:gravity="center"
+            android:text="식당 이름"
+            android:textSize="25dp" />
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -23,7 +25,8 @@
             android:layout_height="70dp"
             android:layout_weight="3"
             android:checked="true"
-            android:text="체크" />
+            android:text="체크"
+            android:textSize="25dp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         Button button=(Button)findViewById(R.id.button);
         Button button2=(Button)findViewById(R.id.button2);
         Button button3=(Button)findViewById(R.id.button3);
-        Button button4=(Button)findViewById(R.id.button4);
+
 
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         final ArrayList<Restaurant> onerestaurants=new ArrayList<Restaurant>();
@@ -109,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2=new Intent(MainActivity.this,Whereactivity.class);
-                intent2.putParcelableArrayListExtra("To where", restaurants);
+                Intent intent2=new Intent(MainActivity.this,HowmuchActivity.class);
+                intent2.putParcelableArrayListExtra("ToMuch", restaurants);
                 startActivity(intent2);
             }
         });
