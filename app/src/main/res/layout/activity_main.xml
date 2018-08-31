@@ -17,7 +17,6 @@
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
         android:scaleType="centerCrop"
-        android:src="@drawable/random"
         android:text="올랜덤"
         android:textIsSelectable="false"
         android:textSize="40dp" />
@@ -30,16 +29,16 @@
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
         android:scaleType="centerCrop"
-        android:src="@drawable/random"
         android:text="혼밥"
-        android:textSize="40dp" />
+        android:textSize="40dp"
+        android:drawableLeft="@drawable/random"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/money"
+        android:drawableLeft="@drawable/random"
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
         android:scaleType="centerCrop"
@@ -52,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/baedal"
+        android:drawableLeft="@drawable/random"
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
         android:scaleType="centerCrop"
