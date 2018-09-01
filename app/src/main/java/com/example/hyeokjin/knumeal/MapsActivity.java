@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -16,15 +19,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -136,6 +146,8 @@ public class MapsActivity extends FragmentActivity
 
     }
 
+
+
     //위치정보 구하기 리스너
     LocationListener locationListener = new LocationListener() {
         @Override
@@ -165,7 +177,7 @@ public class MapsActivity extends FragmentActivity
             distance = Double.parseDouble(String.format("%.2f",parseBefore));
 
             textView_distance.setText("거리 : "+distance+"m");
-            textView_time.setText("시간 : 약 도보 "+Math.round(distance/60.0)+"분");
+            textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
 
         }
 
@@ -181,7 +193,7 @@ public class MapsActivity extends FragmentActivity
 
 
     /**
-     * Mnipulates the map once available.
+     * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
      * we just add a marker near Sydney, Australia.
@@ -208,8 +220,6 @@ public class MapsActivity extends FragmentActivity
         Log.d(TAG,"onMapReady : \n");
 
         mMap = googleMap;
-        String formattingNumber = PhoneNumberUtils.formatNumber(result_restaurant.get(0).getPhone_number());
-       // Uri uri = Uri.parse("tel:"+result_restaurant.get(0).getPhone_number());
 
         LatLng ilchungdam = new LatLng(35.888605,128.612187);
 
@@ -219,43 +229,28 @@ public class MapsActivity extends FragmentActivity
         MarkerOptions marker = new MarkerOptions();
         marker.position(restaurant_pos);
         marker.title(result_restaurant.get(0).getName());
-        //"☎"
-        marker.snippet(formattingNumber);
+
+        marker.snippet("☎ : "+result_restaurant.get(0).getPhone_number());
         markers.add(marker);
 
-        /*
+        GoogleMap.OnInfoWindowClickListener infoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                String markerId = marker.getId();
+                Uri uri = Uri.parse("tel:"+result_restaurant.get(0).getPhone_number());
+                Intent it = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(it);
+            }
+        };
+
+        mMap.setOnInfoWindowClickListener(infoWindowClickListener);
+
+
+
         mMap.addMarker(marker).showInfoWindow();
 
-        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
-            @Override
-            public View getInfoWindow(Marker arg0) {
-                return null;
-            }
 
-            @Override
-            public View getInfoContents(Marker marker) {
-
-                LinearLayout info = new LinearLayout(mContext);
-                info.setOrientation(LinearLayout.VERTICAL);
-
-                TextView title = new TextView(mContext);
-                title.setTextColor(Color.BLACK);
-                title.setGravity(Gravity.CENTER);
-                title.setTypeface(null, Typeface.BOLD);
-                title.setText(marker.getTitle());
-
-                TextView snippet = new TextView(mContext);
-                snippet.setTextColor(Color.GRAY);
-                snippet.setText(marker.getSnippet());
-
-                info.addView(title);
-                info.addView(snippet);
-
-                return info;
-            }
-        });
-        */
 
 
         //Toast.makeText(getApplicationContext(),"lat = "+mLatitude+"\nlong = "+mLongitude,Toast.LENGTH_SHORT).show();
