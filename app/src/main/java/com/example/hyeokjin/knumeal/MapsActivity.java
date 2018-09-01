@@ -173,11 +173,11 @@ public class MapsActivity extends FragmentActivity
 
             myPosition = new LatLng(mLatitude,mLongitude);
 
-            parseBefore = getDistance();
+            parseBefore = getDistance()/1000.0;
             distance = Double.parseDouble(String.format("%.2f",parseBefore));
 
-            textView_distance.setText("거리 : "+distance+"m");
-            textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
+            textView_distance.setText("거리 : "+distance+"km");
+            textView_time.setText("시간 : "+Math.round(distance/0.06)+"분");
 
         }
 
