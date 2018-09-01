@@ -33,10 +33,10 @@ public class Whereactivity extends AppCompatActivity {
             if(where_restaurant.get(j).getPosition().equals("Hall_gate")){
                 hall_restaurant.add(where_restaurant.get(j));
             }
-            if(where_restaurant.get(j).getPosition().equals("Main_gate")||where_restaurant.get(j).getPosition().equals("Hall_gate")){
+            if(where_restaurant.get(j).getPosition().equals("Main_gate") || where_restaurant.get(j).getPosition().equals("Hall_gate")){
                 mainhall_restaurant.add(where_restaurant.get(j));
             }
-            if(where_restaurant.get(j).getPosition().equals("North_gate")){
+            if(where_restaurant.get(j).getPosition().equals("North_gate")) {
                 north_restaurant.add(where_restaurant.get(j));
             }
 
