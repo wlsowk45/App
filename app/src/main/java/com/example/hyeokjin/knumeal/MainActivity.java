@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("북경반점", 35.8857360, 128.6109280, 2,"Hall_gate",4000,"053-952-4810",1));
         restaurants.add(new Restaurant("해금강", 35.8851460, 128.6121580, 2,"Hall_gate",3000,"053-941-5289",1));
 
-
-
         restaurants.add(new Restaurant("밥버거", 35.8855700, 128.6096760, 1,"Hall_gate",3000,"053-939-0982",0));
         restaurants.add(new Restaurant("종이밥", 35.8855620, 128.6104720, 1,"Hall_gate",3000,"053-816-5300",0));
         restaurants.add(new Restaurant("우리분식", 35.8849900, 128.6098150, 2,"Hall_gate",5000,"053-942-7877",0));
