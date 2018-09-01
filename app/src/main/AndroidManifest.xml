@@ -14,8 +14,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
-        android:label="뭐먹지"
+        android:icon="@drawable/icon4"
+        android:label="뭐먹을래"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -55,7 +55,12 @@
         <activity
             android:name=".finalActivity"
             android:label="랜덤가즈아~~" />
-        <activity android:name=".Whereactivity" />
+
+        <activity android:name=".Whereactivity"
+                    android:label="어디서 먹으시나요"></activity>
+
+        
+
     </application>
 
 </manifest>
