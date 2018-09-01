@@ -71,6 +71,17 @@ public class MainActivity extends AppCompatActivity {
         restaurants.add(new Restaurant("거침없이 파닭", 35.8852660, 128.6123780, 2,"Main_gate",5500,"053-952-9937",1));
         restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
         //정문
+        restaurants.add(new Restaurant("김밥파는사람들", 35.882932, 128.621543, 2,"Main_gate",13000,"053-958-9583",1));
+        restaurants.add(new Restaurant("고기듬뿍대왕비빔밥", 35.895804, 128.612526, 2,"Main_gate",14000,"053-955-0678",1));
+        restaurants.add(new Restaurant("숯불위 석쇠 한판", 35.885594, 128.616700, 2,"Main_gate",16000,"053-944-6555",1));
+        restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
+        restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
+        restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
+        restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
+        restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
+        restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
+        restaurants.add(new Restaurant("닥떼들", 35.885042, 128.612467, 2,"Main_gate",8000,"053-939-2151",1));
+
 
 
 
