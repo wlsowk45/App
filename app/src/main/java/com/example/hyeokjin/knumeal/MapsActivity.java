@@ -4,12 +4,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -19,21 +16,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -174,7 +165,7 @@ public class MapsActivity extends FragmentActivity
             distance = Double.parseDouble(String.format("%.2f",parseBefore));
 
             textView_distance.setText("거리 : "+distance+"m");
-            textView_time.setText("시간 : "+Math.round(distance/60.0)+"분");
+            textView_time.setText("시간 : 약 도보 "+Math.round(distance/60.0)+"분");
 
         }
 
@@ -190,7 +181,7 @@ public class MapsActivity extends FragmentActivity
 
 
     /**
-     * Manipulates the map once available.
+     * Mnipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
      * we just add a marker near Sydney, Australia.
