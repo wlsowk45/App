@@ -12,18 +12,26 @@ public class Restaurant implements Parcelable {
     private String position;
     private int price;
     private int checked;
+    private String phone_number;
+    private int delivery;
 
 
-    public Restaurant(String name, double latitude, double longitude, int min_person, String position, int price) {
+
+    public Restaurant(String name, double latitude, double longitude, int min_person, String position, int price, String phone_number, int delivery) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.min_person = min_person;
         this.position = position;
         this.price = price;
+        this.phone_number = phone_number;
+        this.delivery = delivery;
     }
 
+
+
     private void readFromParcel(Parcel in) {
+
         name = in.readString();
         latitude = in.readDouble();
         longitude = in.readDouble();
@@ -31,6 +39,9 @@ public class Restaurant implements Parcelable {
         position = in.readString();
         price = in.readInt();
         checked=in.readInt();
+        phone_number=in.readString();
+        delivery=in.readInt();
+
     }
 
 
@@ -53,6 +64,8 @@ public class Restaurant implements Parcelable {
         dest.writeString(position);
         dest.writeInt(price);
         dest.writeInt(checked);
+        dest.writeString(phone_number);
+        dest.writeInt(delivery);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -112,6 +125,23 @@ public class Restaurant implements Parcelable {
 
         return min_person;
     }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public int getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(int delivery) {
+        this.delivery = delivery;
+    }
+
 
     public void setMin_person(int min_person) {
         this.min_person = min_person;
