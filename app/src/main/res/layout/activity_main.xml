@@ -9,57 +9,56 @@
 
     <Button
         android:id="@+id/button3"
+        style="@style/ButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:drawableLeft="@drawable/random"
+        android:background="#fdf5e6"
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
-        android:scaleType="centerCrop"
-        android:text="올랜덤"
+        android:scaleType="matrix"
+        android:text="막 먹자"
         android:textIsSelectable="false"
-        android:textSize="40dp" />
+        android:textSize="25dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:background="#fdf5dc"
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
         android:scaleType="centerCrop"
-        android:text="혼밥"
-        android:textSize="40dp"
-        android:drawableLeft="@drawable/random"/>
+        android:text="혼밥 하자"
+        android:textSize="25dp" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:drawableLeft="@drawable/random"
+        android:adjustViewBounds="true"
+        android:background="#fdf5d2"
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
-        android:scaleType="centerCrop"
-        android:text="가격으로 정하기"
-        android:textSize="40dp"
+        android:text="가격으로 정하자"
+        android:textSize="25dp"
         android:textStyle="normal" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:drawableLeft="@drawable/random"
+        android:adjustViewBounds="true"
         android:fontFamily="@font/joseonilbo"
         android:padding="0sp"
+        android:background="#faebcd"
         android:scaleType="centerCrop"
         android:text="시켜먹자"
-        android:textSize="40dp"
-        android:textStyle="normal"
-
-
-        />
+        android:textSize="25dp"
+        android:textStyle="normal" />
 
 </LinearLayout>
